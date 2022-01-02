@@ -8,41 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showingAlert = false
+    
     var body: some View {
-        VStack {
-            Button("Button 1") { }
-                .buttonStyle(.bordered)
-            Button("Button 2", role: .destructive) { }
-                .buttonStyle(.bordered)
-            Button("Button 3") { }
-                .buttonStyle(.borderedProminent)
-            Button("Button 4", role: .destructive) { }
-                .buttonStyle(.borderedProminent)
-                .tint(.mint)
-            Button {
-                print("Button was tapped")
-            } label: {
-                Text("Tap me!")
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(.red)
-            }
-            Button {
-                print("Edit button was tapped")
-            } label: {
-                Image(systemName: "pencil")
-                    .renderingMode(.original)
-            }
-            Button {
-                print("Edit button was tapped")
-            } label: {
-                Label("Edit", systemImage: "pencil")
-            }
+        Button("Show Alert"){
+            showingAlert = true
         }
-    }
-
-    func executeDelete() {
-        print("Now deleting…")
+        .alert("Important Message", isPresented: $showingAlert){
+            Button("OK"){}
+            Button("Delete", role: .destructive) { }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Please read this.")
+        }
     }
 }
 
